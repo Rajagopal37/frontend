@@ -36,7 +36,8 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
   const handleSaveClick = async (index) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/tasks/${tasks[index]._id}`,
+        `https://backend-srni.onrender.com/api/tasks/${tasks[index]._id}`,
+        // `http://localhost:5000/api/tasks/${tasks[index]._id}`,
         editedTask
       );
       updateTask(index, response.data); // Update the task in UI
@@ -49,7 +50,10 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
   // Handle Delete Button Click (delete task)
   const handleDeleteClick = async (index) => {
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${tasks[index]._id}`);
+      await axios.delete(
+        // (`http://localhost:5000/api/tasks/${tasks[index]._id}`);
+        `https://backend-srni.onrender.com/api/tasks/${tasks[index]._id}`
+      );
       deleteTask(index); // Remove task from UI
     } catch (error) {
       console.error("Error deleting task:", error);
