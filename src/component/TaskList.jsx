@@ -17,7 +17,9 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/tasks");
+        const response = await axios.get(
+          "https://backend-srni.onrender.com/api/tasks"
+        );
         setTasks(response.data);
       } catch (error) {
         console.error("Error fetching tasks:", error);
