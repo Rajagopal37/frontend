@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import moment from "moment"; // We'll use moment.js to handle date calculations
 
 const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
   const [editIndex, setEditIndex] = useState(null); // Track the current editing task
@@ -39,7 +38,6 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
     try {
       const response = await axios.put(
         `https://backend-srni.onrender.com/api/tasks/${tasks[index]._id}`,
-        // `http://localhost:5000/api/tasks/${tasks[index]._id}`,
         editedTask
       );
       updateTask(index, response.data); // Update the task in UI
@@ -53,7 +51,6 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
   const handleDeleteClick = async (index) => {
     try {
       await axios.delete(
-        // (`http://localhost:5000/api/tasks/${tasks[index]._id}`);
         `https://backend-srni.onrender.com/api/tasks/${tasks[index]._id}`
       );
       deleteTask(index); // Remove task from UI
@@ -68,6 +65,15 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
     setEditedTask({ ...editedTask, [name]: value });
   };
 
+  // Calculate task counts
+  const totalTasks = tasks.length;
+  const completedTasks = tasks.filter(
+    (task) => task.status === "Completed"
+  ).length;
+  const incompleteTasks = tasks.filter(
+    (task) => task.status === "Not Completed"
+  ).length;
+
   // Filter Tasks Based on Status
   const filteredTasks = tasks.filter((task) => {
     if (filter === "Completed") return task.status === "Completed";
@@ -77,7 +83,24 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
 
   return (
     <div>
-      <h3 className="my-3">Task Lists</h3>
+      <div className="d-flex justify-content-between align-items-center my-3">
+        <div>
+          <h3 className="mb-0">Task Lists</h3>
+        </div>
+
+        {/* Task Counts */}
+        <div className="d-flex align-items-center">
+          <span className="bg-primary text-white fw-bold  px-3 py-2 mx-1 rounded-circle ">
+            {totalTasks}
+          </span>
+          <span className="bg-success text-white fw-bold   px-3 py-2 mx-1 rounded-circle">
+            {completedTasks}
+          </span>
+          <span className="bg-danger text-white fw-bold  px-3 py-2 mx-1 rounded-circle">
+            {incompleteTasks}
+          </span>
+        </div>
+      </div>
 
       {/* Status Filter */}
       <div className="mb-3">
