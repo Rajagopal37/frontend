@@ -27,7 +27,7 @@ const App = () => {
 
   return (
     <div className="container">
-      <h2 className="my-4 text-center">Task Management</h2>
+      <h2 className="my-4 text-center">Task Manager</h2>
       <TaskForm addTask={addTask} />
       <TaskList
         tasks={tasks}
