@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TaskForm from "./component/TaskForm";
 import TaskList from "./component/TaskList";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "./App.css";
 
 const App = () => {

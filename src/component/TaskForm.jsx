@@ -103,7 +103,7 @@ const TaskForm = ({ addTask }) => {
       <div className="d-flex justify-content-center">
         <button
           type="submit"
-          className="btn btn-success text-white fw-bold rounded w-25 h-50"
+          className="btn btn-success text-white fs-5 rounded w-25 h-50"
         >
           Add Task
         </button>

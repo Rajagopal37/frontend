@@ -112,7 +112,7 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
         >
           <option value="All">All</option>
           <option value="Completed">Completed</option>
-          <option value="Not Completed">Not Completed</option>
+          <option value="Not Completed">Incomplete</option>
         </select>
       </div>
 
@@ -145,8 +145,9 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
                       onChange={handleInputChange}
                     >
                       <option value="Completed">Completed</option>
-                      <option value="Not Completed">Not Completed</option>
+                      <option value="Not Completed">Incomplete</option>
                     </select>
+
                     <input
                       type="date"
                       name="assignDate"
@@ -166,8 +167,17 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
                   <>
                     <h5 className="card-title">{task.name}</h5>
                     <p className="card-text">{task.description}</p>
+
                     <p className="card-text">
-                      Status:{" "}
+                      Assign Date:{" "}
+                      {new Date(task.assignDate).toLocaleDateString()}
+                    </p>
+                    <p className="card-text">
+                      Last Date: {new Date(task.lastDate).toLocaleDateString()}
+                    </p>
+
+                    <p className="card-text text-center fs-5">
+                      {/* Status:{" "} */}
                       <span
                         className={`badge ${
                           task.status === "Completed"
@@ -178,14 +188,8 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
                         {task.status}
                       </span>
                     </p>
-                    <p className="card-text">
-                      Assign Date:{" "}
-                      {new Date(task.assignDate).toLocaleDateString()}
-                    </p>
-                    <p className="card-text">
-                      Last Date: {new Date(task.lastDate).toLocaleDateString()}
-                    </p>
-                    <p className="card-text fw-bold">
+
+                    <p className="card-text text-center fw-bold">
                       Remaining Days:{" "}
                       {Math.ceil(
                         (new Date(task.lastDate) - new Date()) /
@@ -195,27 +199,27 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
                   </>
                 )}
 
-                <div className="d-flex justify-content-between">
+                <div className="d-flex justify-content-evenly">
                   {editIndex === index ? (
                     <button
                       className="btn btn-success"
                       onClick={() => handleSaveClick(index)}
                     >
-                      Save
+                      <i className="bi bi-check-square"></i>
                     </button>
                   ) : (
                     <button
                       className="btn btn-primary"
                       onClick={() => handleEditClick(index, task)}
                     >
-                      Edit
+                      <i className="bi bi-pencil-square"></i>
                     </button>
                   )}
                   <button
                     className="btn btn-danger"
                     onClick={() => handleDeleteClick(index)}
                   >
-                    Delete
+                    <i className="bi bi-trash3"></i>
                   </button>
                 </div>
               </div>
