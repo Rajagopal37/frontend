@@ -84,6 +84,20 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
   return (
     <div>
       <div className="d-flex justify-content-between align-items-center my-3">
+        {/* Status Filter */}
+        <div className="mb-3">
+          <label>Status Filter: </label>
+          <select
+            onChange={(e) => setFilter(e.target.value)}
+            value={filter}
+            className="ms-2"
+          >
+            <option value="All">All</option>
+            <option value="Completed">Completed</option>
+            <option value="Not Completed">Incomplete</option>
+          </select>
+        </div>
+
         <div>
           <h3 className="mb-0">Task Lists</h3>
         </div>
@@ -100,20 +114,6 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
             {incompleteTasks}
           </span>
         </div>
-      </div>
-
-      {/* Status Filter */}
-      <div className="mb-3">
-        <label>Status Filter: </label>
-        <select
-          onChange={(e) => setFilter(e.target.value)}
-          value={filter}
-          className="ms-2"
-        >
-          <option value="All">All</option>
-          <option value="Completed">Completed</option>
-          <option value="Not Completed">Incomplete</option>
-        </select>
       </div>
 
       {/* Displaying Tasks */}
